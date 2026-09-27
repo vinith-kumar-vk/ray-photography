@@ -6,6 +6,7 @@ const Home = ({ setActiveTab, onOpenLightbox, onOpenVideo, onOpenStory }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const videoRef = useRef(null);
 
@@ -38,11 +39,20 @@ const Home = ({ setActiveTab, onOpenLightbox, onOpenVideo, onOpenStory }) => {
 
   return (
     <div className="animate-fadeIn">
-      {/* HERO SECTION - TAP/CLICK ANYWHERE TO TOGGLE PLAY/PAUSE (NO ICON OVERLAY) */}
+      {/* HERO SECTION WITH ZERO BLACK SCREEN POSTER PRELOADER */}
       <section
         onClick={handleHeroClick}
         className="relative w-full h-[calc(100vh-80px)] min-h-[550px] flex items-center justify-center overflow-hidden bg-black cursor-pointer"
       >
+        {/* Instant Thumbnail Poster Image - Shows immediately on load to prevent any black screen */}
+        <img
+          src="/hero-poster.jpg"
+          alt="Ray Photography Wedding Poster"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 z-10 ${
+            isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
+        />
+
         {/* Full-width 100% Edge-to-Edge Wedding Background Video */}
         <video
           ref={videoRef}
@@ -51,6 +61,9 @@ const Home = ({ setActiveTab, onOpenLightbox, onOpenVideo, onOpenStory }) => {
           muted
           playsInline
           preload="auto"
+          poster="/hero-poster.jpg"
+          onCanPlay={() => setIsVideoLoaded(true)}
+          onPlaying={() => setIsVideoLoaded(true)}
           className="absolute inset-0 w-full h-full object-cover scale-100"
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
@@ -59,7 +72,7 @@ const Home = ({ setActiveTab, onOpenLightbox, onOpenVideo, onOpenStory }) => {
         </video>
 
         {/* Subtle Dark Bottom Fade Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-black/20 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-black/20 pointer-events-none z-20" />
 
         {/* Scroll Indicator (Bottom Center) */}
         <div
@@ -67,7 +80,7 @@ const Home = ({ setActiveTab, onOpenLightbox, onOpenVideo, onOpenStory }) => {
             e.stopPropagation();
             window.scrollTo({ top: window.innerHeight - 80, behavior: 'smooth' });
           }}
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 text-center cursor-pointer group"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 text-center cursor-pointer group"
         >
           <span className="text-[10px] uppercase tracking-widest text-gray-300 group-hover:text-[#d4af37] transition-colors block mb-1">
             Scroll to Explore
