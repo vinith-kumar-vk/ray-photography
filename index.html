@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/ray-logo1.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ray Photography | Luxury Wedding Photographers &amp; Cinematic Films</title>
+    <meta name="description" content="Ray Photography specializes in luxury candid wedding photography, editorial bridal portraits, and 4K cinematic wedding trailers in Bengaluru, Goa, Udaipur, and worldwide." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: {
+                DEFAULT: '#d4af37',
+                light: '#f3e5ab',
+                dark: '#aa7c11',
+              }
+            },
+            fontFamily: {
+              serif: ['Cinzel', 'serif'],
+              cormorant: ['Cormorant Garamond', 'serif'],
+              sans: ['Montserrat', 'sans-serif'],
+              script: ['Great Vibes', 'cursive'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#0a0a0d] text-[#f5f5f7]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
